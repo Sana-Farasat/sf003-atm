@@ -46,9 +46,14 @@ else if(userOptions.options === 'Deposit Cash'){
         message:chalk.greenBright('\n Enter your amount which you have to deposit:')
     }
  )
+if(isNaN(deposit.cash)){
+    console.log(chalk.redBright('\n\tPlease enter your amount!'))
+ }
+ else{
  console.log(chalk.blueBright(`\n\tYour current balance is ${myBalance}`));
  console.log(chalk.blueBright(`\n\tDeposit successfully ${deposit.cash}`));
  console.log(chalk.blueBright(`\n\tNow current balance is ${myBalance += deposit.cash}`));
+ }
 }
 else if(userOptions.options === 'Transfer Amount'){
  let transfer=await inquirer.prompt(
@@ -69,6 +74,8 @@ else if(userOptions.options === 'Transfer Amount'){
  }else if(transfer.cash === myBalance){
     console.log(chalk.blueBright(`\n\tYour current balance is ${myBalance}`));
     console.log(chalk.blueBright(`\n\tSuccessfully transfered! Now your remaining balance is ${myBalance-=transfer.cash} `))
+ }else if(isNaN(transfer.cash)){
+    console.log(chalk.redBright('\n\tPlease enter your amount!'))
  }
 }
 else if(userOptions.options === 'Pay Bills'){
@@ -96,7 +103,9 @@ console.log(chalk.blueBright(`\n\tYour remaining balance is ${myBalance -= billK
 }else if(billKE.amount === myBalance){
     console.log(chalk.blueBright(`\n\t Bill paid ${billKE.amount}`))
     console.log(chalk.blueBright(`\n\tRemaining balance is ${myBalance -= billKE.amount}`))
-}
+}else if(isNaN(billKE.amount)){
+    console.log(chalk.redBright('\n\tPlease enter your amount!'))
+ }
 }
 else if(bills.cash === 'SSGC'){
  let billSSGC=await inquirer.prompt(
@@ -114,7 +123,9 @@ console.log(chalk.blueBright(`\n\tRemaining balance is ${myBalance -= billSSGC.a
 }else if(billSSGC.amount === myBalance){
     console.log(chalk.blueBright(`\n\t Bill paid ${billSSGC.amount}`))
     console.log(chalk.blueBright(`\n\tRemaining balance is ${myBalance -= billSSGC.amount}`))
-}
+}else if(isNaN(billSSGC.amount)){
+    console.log(chalk.redBright('\n\tPlease enter your amount!'))
+ }
 }
 else if(bills.cash === 'KWSB'){
 
@@ -133,7 +144,9 @@ console.log(chalk.blueBright(`\n\tYour remaining balance is ${myBalance -= billK
 }else if(billKWSB.amount === myBalance){
     console.log(chalk.blueBright(`\n\t Bill paid ${billKWSB.amount}`))
     console.log(chalk.blueBright(`\n\tRemaining balance is ${myBalance -= billKWSB.amount}`))
-}
+}else if(isNaN(billKWSB.amount)){
+    console.log(chalk.redBright('\n\tPlease enter your amount!'))
+ }
 }
 }
 else if (userOptions.options === 'Withdraw'){
@@ -161,7 +174,9 @@ if(withdrawMethod.method === 'Enter your amount'){
     } else if(amountAnswer.amount === myBalance){
         console.log(chalk.blueBright(`\n\tYour current balance is ${myBalance}`));
        console.log(chalk.blueBright(`\n\tRemaining balance is ${myBalance -= amountAnswer.amount}`));
-    }
+    }else if(isNaN(amountAnswer.amount)){
+        console.log(chalk.redBright('\n\tPlease enter your amount!'))
+     }
 }
 else if(withdrawMethod.method === 'Fast Cash'){
     let fastCash = await inquirer.prompt(
@@ -180,7 +195,9 @@ else if(withdrawMethod.method === 'Fast Cash'){
     }else if(fastCash.fast === myBalance.toString()){
         console.log(chalk.blueBright(`\n\tYour current balance is ${myBalance}`));
        console.log(chalk.blueBright(`\n\tRemaining balance is `, myBalance -= parseInt(fastCash.fast)))
-    }
+    }else if(isNaN(fastCash.fast)){
+        console.log(chalk.redBright('\n\tPlease enter your amount!'))
+     }
    }
   }
 }

@@ -34,9 +34,14 @@ while (condition) {
                 type: 'number',
                 message: chalk.greenBright('\n Enter your amount which you have to deposit:')
             });
-            console.log(chalk.blueBright(`\n\tYour current balance is ${myBalance}`));
-            console.log(chalk.blueBright(`\n\tDeposit successfully ${deposit.cash}`));
-            console.log(chalk.blueBright(`\n\tNow current balance is ${myBalance += deposit.cash}`));
+            if (isNaN(deposit.cash)) {
+                console.log(chalk.redBright('\n\tPlease enter your amount!'));
+            }
+            else {
+                console.log(chalk.blueBright(`\n\tYour current balance is ${myBalance}`));
+                console.log(chalk.blueBright(`\n\tDeposit successfully ${deposit.cash}`));
+                console.log(chalk.blueBright(`\n\tNow current balance is ${myBalance += deposit.cash}`));
+            }
         }
         else if (userOptions.options === 'Transfer Amount') {
             let transfer = await inquirer.prompt({
@@ -56,6 +61,9 @@ while (condition) {
             else if (transfer.cash === myBalance) {
                 console.log(chalk.blueBright(`\n\tYour current balance is ${myBalance}`));
                 console.log(chalk.blueBright(`\n\tSuccessfully transfered! Now your remaining balance is ${myBalance -= transfer.cash} `));
+            }
+            else if (isNaN(transfer.cash)) {
+                console.log(chalk.redBright('\n\tPlease enter your amount!'));
             }
         }
         else if (userOptions.options === 'Pay Bills') {
@@ -82,6 +90,9 @@ while (condition) {
                     console.log(chalk.blueBright(`\n\t Bill paid ${billKE.amount}`));
                     console.log(chalk.blueBright(`\n\tRemaining balance is ${myBalance -= billKE.amount}`));
                 }
+                else if (isNaN(billKE.amount)) {
+                    console.log(chalk.redBright('\n\tPlease enter your amount!'));
+                }
             }
             else if (bills.cash === 'SSGC') {
                 let billSSGC = await inquirer.prompt({
@@ -100,6 +111,9 @@ while (condition) {
                     console.log(chalk.blueBright(`\n\t Bill paid ${billSSGC.amount}`));
                     console.log(chalk.blueBright(`\n\tRemaining balance is ${myBalance -= billSSGC.amount}`));
                 }
+                else if (isNaN(billSSGC.amount)) {
+                    console.log(chalk.redBright('\n\tPlease enter your amount!'));
+                }
             }
             else if (bills.cash === 'KWSB') {
                 let billKWSB = await inquirer.prompt({
@@ -117,6 +131,9 @@ while (condition) {
                 else if (billKWSB.amount === myBalance) {
                     console.log(chalk.blueBright(`\n\t Bill paid ${billKWSB.amount}`));
                     console.log(chalk.blueBright(`\n\tRemaining balance is ${myBalance -= billKWSB.amount}`));
+                }
+                else if (isNaN(billKWSB.amount)) {
+                    console.log(chalk.redBright('\n\tPlease enter your amount!'));
                 }
             }
         }
@@ -144,6 +161,9 @@ while (condition) {
                     console.log(chalk.blueBright(`\n\tYour current balance is ${myBalance}`));
                     console.log(chalk.blueBright(`\n\tRemaining balance is ${myBalance -= amountAnswer.amount}`));
                 }
+                else if (isNaN(amountAnswer.amount)) {
+                    console.log(chalk.redBright('\n\tPlease enter your amount!'));
+                }
             }
             else if (withdrawMethod.method === 'Fast Cash') {
                 let fastCash = await inquirer.prompt({
@@ -162,6 +182,9 @@ while (condition) {
                 else if (fastCash.fast === myBalance.toString()) {
                     console.log(chalk.blueBright(`\n\tYour current balance is ${myBalance}`));
                     console.log(chalk.blueBright(`\n\tRemaining balance is `, myBalance -= parseInt(fastCash.fast)));
+                }
+                else if (isNaN(fastCash.fast)) {
+                    console.log(chalk.redBright('\n\tPlease enter your amount!'));
                 }
             }
         }
